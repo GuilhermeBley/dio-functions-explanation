@@ -458,7 +458,7 @@ builder.Services.AddDbContext<SeuDbContext>(configuracao =>
 ### Importância das funções no C#
 podendo ser úteis organizar o código, promover reutilização e modularidade, e facilitar a manutenção.
 
-Referências: <br/>
-    Methods: https://learn.microsoft.com/pt-br/dotnet/csharp/programming-guide/classes-and-structs/methods <br/>
-    Delegados: https://www.freecodecamp.org/news/action-and-func-delegates-in-c-sharp/
+Referências:
+<br/>Methods: https://learn.microsoft.com/pt-br/dotnet/csharp/programming-guide/classes-and-structs/methods
+<br/>Delegados: https://www.freecodecamp.org/news/action-and-func-delegates-in-c-sharp/
 
