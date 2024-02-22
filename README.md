@@ -145,7 +145,7 @@ builder.Services.AddDbContext<SeuDbContext>(configuracao =>
 {
     // Utilizando uma Action para configuração.
     // Parâmetro 'configuracao' passa um objeto editável que será
-    // executado posteriormente.
+    // coletado posteriormente.
 });
 ```
 
