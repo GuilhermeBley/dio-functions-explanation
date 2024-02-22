@@ -1,12 +1,12 @@
 # Funções em C#
 
-Nesse artigo vai ser apresentado como podem ser utilizadas e o que são as funções na linguagem C#.
-As funções são basicamente blocos de código que realizam uma atividade específica e podem ser reutilizados em diferentes partes de uma aplicação, podendo elas ser utilizadas extensivamente para dividir código, separar funcionalidades e especificar ações.
-Agora que foi apresentado um _overview_ do que são as funções, podemos agora entrar um pouco mais afundo e explicar, aplicar e exemplificar alguns dos mais comuns usos de funções no C#.
+Nesse artigo vai ser apresentado como podem ser utilizadas e o que são as funções na linguagem C#. <br/>
+As funções são basicamente blocos de código que realizam uma atividade específica e podem ser reutilizados em diferentes partes de uma aplicação, podendo elas ser utilizadas extensivamente para dividir código, separar funcionalidades e especificar ações. <br/>
+Agora que foi apresentado um _overview_ do que são as funções, podemos agora entrar um pouco mais afundo e explicar, aplicar e exemplificar alguns dos mais comuns usos de funções no C#. <br/>
 
 ## Métodos
 
-Métodos são um tipo de função mais comum, eles são representados por blocos de código dentro de uma classe, sua sintaxe é definida pelo nível de acesso, assinaturas opicionais, tipo do retorno, nome do método, parâmetro opcional tipado, seus respectivos parâmetros, e por fim, a ação que o método vai realizar ao ser executado.
+Métodos são um tipo de função mais comum, eles são representados por blocos de código dentro de uma classe, sua sintaxe é definida pelo nível de acesso, assinaturas opicionais, tipo do retorno, nome do método, parâmetro opcional tipado, seus respectivos parâmetros, e por fim, a ação que o método vai realizar ao ser executado. <br/>
 
 ```csharp
 public void NomeDoMetodo(string param1, string param2)
@@ -19,8 +19,8 @@ Agora vamos ver o que é especificamente cada um desses itens mencionados.
 
 ### Assinaturas dos métodos
 
-Para iniciar a aplicação de um método, deve-se primeiramente colocar seu nível de visibilidade, sendo eles quatro, `public`, `internal`, `protected` e `private`, estando em uma ordem do mais vísivel para o menos. Isso acaba sendo um recurso fundamental na linguagem de programação, pois por conta disso é possível controlar o acesso aos membros de uma classe.
-- public
+Para iniciar a aplicação de um método, deve-se primeiramente colocar seu nível de visibilidade, sendo eles quatro, `public`, `internal`, `protected` e `private`, estando em uma ordem do mais vísivel para o menos. Isso acaba sendo um recurso fundamental na linguagem de programação, pois por conta disso é possível controlar o acesso aos membros de uma classe. <br/>
+- public <br/>
     Método pode ser acessado de qualquer local ou projeto.
 
 ```csharp
@@ -53,7 +53,7 @@ namespace Projeto1
 }
 ```
   
-- internal
+- internal <br/>
     Método pode ser acessado de qualquer local dentro do próprio projeto (mesmo _Assembly_).
 ```csharp
 namespace Projeto2
@@ -94,7 +94,7 @@ namespace Projeto1
 
 Obs. Exemplo de método `internal` e `public` anterior simula `projeto1` e `projeto2` em diferentes projetos, e não no mesmo arquivo.
 
-- protected
+- protected <br/>
     Método pode ser acessado somente de dentro da classe ou caso tenha uma herança.
 
 ```csharp
@@ -122,7 +122,7 @@ public class ExemploProtected
 }
 ```
   
-- private
+- private <br/>
     Método pode ser acessado somente de dentro da classe.
 
 ```csharp
@@ -145,7 +145,11 @@ public class ExemploPrivado
     }
 }
 ```
+Como pode ser visto nos exemplos, os modificadores de acesso tem um imenso poder dentro do código, através das palavras reservadas `private`, `public`, `internal` e `protected` pode ser controlado quem consegue acessar os métodos de uma classe, tendo níveis para cada um e gerando exceções no caso de descumprimento da norma. Uma maneira mais simples de entender pode ser vista na seguinte imagem, onde cada nível demonstra uma camada a mais de acessibilidade:
+
 ![Encapsulamento](https://github.com/GuilhermeBley/dio-functions-explanation/assets/69880922/53a9b303-d148-467c-9fa2-68fa1985aad6)
+
+Essas assinaturas são fundamentais para controlar o acesso aos métodos de uma classe, promovendo maior segurança, modularidade e manutenibilidade do código em projetos C#.
 
 Além disso, os métodos também podem ter outros tipos de assinaturas opicitonais, como por exemplo:
 
