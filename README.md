@@ -20,8 +20,9 @@ Agora vamos ver o que é especificamente cada um desses itens mencionados.
 ### Assinaturas dos métodos
 
 Para iniciar a aplicação de um método, deve-se primeiramente colocar seu nível de visibilidade, sendo eles quatro, `public`, `internal`, `protected` e `private`, estando em uma ordem do mais vísivel para o menos. Isso acaba sendo um recurso fundamental na linguagem de programação, pois por conta disso é possível controlar o acesso aos membros de uma classe. <br/>
-#### public
-    Método pode ser acessado de qualquer local ou projeto.
+
+#### public    
+Método pode ser acessado de qualquer local ou projeto.
 
 ```csharp
 namespace Projeto2
@@ -54,7 +55,8 @@ namespace Projeto1
 ```
   
 #### internal <br/>
-    Método pode ser acessado de qualquer local dentro do próprio projeto (mesmo _Assembly_).
+Método pode ser acessado de qualquer local dentro do próprio projeto (mesmo _Assembly_).
+
 ```csharp
 namespace Projeto2
 {
@@ -95,7 +97,7 @@ namespace Projeto1
 Obs. Exemplo de método `internal` e `public` anterior simula `projeto1` e `projeto2` em diferentes projetos, e não no mesmo arquivo.
 
 #### protected <br/>
-    Método pode ser acessado somente de dentro da classe ou caso tenha uma herança.
+Método pode ser acessado somente de dentro da classe ou caso tenha uma herança.
 
 ```csharp
 public static void Main()
@@ -123,7 +125,7 @@ public class ExemploProtected
 ```
   
 #### private <br/>
-    Método pode ser acessado somente de dentro da classe.
+Método pode ser acessado somente de dentro da classe.
 
 ```csharp
 public static void Main()
@@ -238,8 +240,32 @@ O método que deriva do _abstract_ ou _virtual_ deve sempre utilizar a palavra r
 Sobre métodos abstratos e virtuais é importante salientar que caso algum método utilize um dos dois, ele deve ser no mínimo protegido (_protected_), não permitindo que ele seja privado. Isso acaba fazendo sentido, por conta de que se ele fosse privado, ele só poderia ser visto no escopo da própria classe, e não de uma derivada.
 
 #### static
-  Métodos com assinatura `static` não compartilham do contexto da classe, como o próprio nome diz, eles são estáticos e não tem um 'estado'.
-  
+Métodos com assinatura `static` não compartilham do contexto da classe, como o próprio nome diz, eles são estáticos e não tem um 'estado', sendo um método que pertence à própria classe, em vez de pertencer a instâncias individuais significando que você pode chamar um método estático diretamente na classe, sem precisar criar uma instância da classe. Por conta de eles não compartilharem nenhum contexto com a classe, caso seja forçado esse acesso, o compilador vai gerar um erro, demonstrando que o método só consegue utilizar membros iguais ao dele, isto é, com a assinatura `static`, como pode ser visto no exemplo a seguir:
+
+```csharp
+class Classe
+{
+    public void MetodoAcessivelPorInstancia()
+    {
+
+    }
+
+    public static void MetodoAcessivelPelaClasse()
+    {
+
+    }
+
+    public static void MetodoEstatico()
+    {
+        MetodoAcessivelPelaClasse(); // Ok
+
+        MetodoAcessivelPorInstancia();  // Erro CS0120
+    }
+}
+```
+
+Os métodos estáticos são frequentemente usados para operações que não dependem do estado do objeto e podem ser no nível de classe, tendo usos comuns em funções de utilidade, métodos de fábrica, métodos de conversão, etc.
+
 ### Retornos
 Logo após todas essas assinaturas de métodos, vamos ir para o seu retorno, que pode existir (retornando qualquer tipo de objeto)
 
@@ -253,9 +279,6 @@ Logo após todas essas assinaturas de métodos, vamos ir para o seu retorno, que
 #### Utilização sem retorno
 #### Utilização com retorno
 #### Utilização com parâmetros
-  
-#### Utilização abstract e virtual
-#### Utilização sealed
 #### Utilização static
 
 ## Delegados
