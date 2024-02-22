@@ -1,12 +1,12 @@
 # Funções em C#
 
 Nesse artigo vai ser apresentado como podem ser utilizadas e o que são as funções na linguagem C#.
-Primeiramente, deve ser explicado o que são as funções, sendo elas basicamente blocos de código que realizam uma atividade específica e podem ser reutilizados em diferentes partes de uma aplicação.
+As funções são basicamente blocos de código que realizam uma atividade específica e podem ser reutilizados em diferentes partes de uma aplicação, podendo elas ser utilizadas extensivamente para dividir código, separar funcionalidades e especificar ações.
 Agora que foi apresentado um _overview_ do que são as funções, podemos agora entrar um pouco mais afundo e explicar, aplicar e exemplificar alguns dos mais comuns usos de funções no C#.
 
 ## Métodos
 
-Métodos são um tipo de função, que são representados por blocos de código dentro de uma classe, sua sintaxe é definida pelo nível de acesso, assinaturas opicionais, tipo do retorno, nome do método, parâmetro opcional tipado, seus respectivos parâmetros, e por fim, a ação que o método vai realizar ao ser executado.
+Métodos são um tipo de função mais comum, eles são representados por blocos de código dentro de uma classe, sua sintaxe é definida pelo nível de acesso, assinaturas opicionais, tipo do retorno, nome do método, parâmetro opcional tipado, seus respectivos parâmetros, e por fim, a ação que o método vai realizar ao ser executado.
 
 ```csharp
 public void NomeDoMetodo(string param1, string param2)
@@ -19,14 +19,135 @@ Agora vamos ver o que é especificamente cada um desses itens mencionados.
 
 ### Assinaturas dos métodos
 
+Para iniciar a aplicação de um método, deve-se primeiramente colocar seu nível de visibilidade, sendo eles quatro, `public`, `internal`, `protected` e `private`, estando em uma ordem do mais vísivel para o menos. Isso acaba sendo um recurso fundamental na linguagem de programação, pois por conta disso é possível controlar o acesso aos membros de uma classe.
 - public
-- internal
-- protected
-- private
+    Método pode ser acessado de qualquer local ou projeto.
 
+```csharp
+namespace Projeto2
+{
+    using Projeto1;
+
+    public static class Program
+    {
+        public static void Main()
+        {
+            // Consigo acessar por aqui
+            new ExemploPublico().MetodoPublico();
+        }
+    }
+}
+
+namespace Projeto1
+{
+    public static class Program
+    {
+        public class ExemploPublico
+        {
+            public void MetodoPublico()
+            {
+                // Faça algo
+            }
+        }
+    }
+}
+```
+  
+- internal
+    Método pode ser acessado de qualquer local dentro do próprio projeto (mesmo _Assembly_).
+```csharp
+namespace Projeto2
+{
+    using Projeto1;
+
+    public static class Program
+    {
+        public static void Main()
+        {
+            // Gera erro CS0122 por conta de ser inacessível
+            new ExemploInterno().MetodoInterno();
+        }
+    }
+}
+
+namespace Projeto1
+{
+    public static class Program
+    {
+        public static void Main()
+        {
+            
+            // Consigo acessar por aqui
+            new ExemploPublico().MetodoInterno();
+        }
+
+        public class ExemploInterno
+        {
+            internal void MetodoInterno()
+            {
+                // Faça algo
+            }
+        }
+    }
+}
+```
+
+Obs. Exemplo de método `internal` e `public` anterior simula `projeto1` e `projeto2` em diferentes projetos, e não no mesmo arquivo.
+
+- protected
+    Método pode ser acessado somente de dentro da classe ou caso tenha uma herança.
+
+```csharp
+public static void Main()
+{
+    // Gera erro CS0122 em qualquer uma das classes por conta de ser inacessível
+    new ExemploProtectedHeranca().MetodoProtegido();
+    new ExemploProtected().MetodoProtegido();
+}
+
+public class ExemploProtectedHeranca : ExemploProtected
+{
+    public void MetodoPublico()
+    {
+        MetodoProtegido(); // Consigo acessar por aqui
+    }
+}
+
+public class ExemploProtected
+{
+    protected void MetodoProtegido()
+    {
+        // Faça algo
+    }
+}
+```
+  
+- private
+    Método pode ser acessado somente de dentro da classe.
+
+```csharp
+public static void Main()
+{
+    // Gera erro CS0122 por conta de ser inacessível
+    new ExemploPrivado().MetodoPrivado();
+}
+
+public class ExemploPrivado
+{
+    public void MetodoPublico()
+    {
+        MeuMetodoPrivado(); // Consigo acessar por aqui
+    }
+
+    private void MetodoPrivado()
+    {
+        // Faça algo
+    }
+}
+```
 ![Encapsulamento](https://github.com/GuilhermeBley/dio-functions-explanation/assets/69880922/53a9b303-d148-467c-9fa2-68fa1985aad6)
 
-Os métodos também podem ter outros tipos de assinaturas opicitonais, como por exemplo:
+Além disso, os métodos também podem ter outros tipos de assinaturas opicitonais, como por exemplo:
 
 - abstract
 - virtual
@@ -150,6 +271,7 @@ builder.Services.AddDbContext<SeuDbContext>(configuracao =>
 ```
 
 ### Importância das funções no C#
+podendo ser úteis organizar o código, promover reutilização e modularidade, e facilitar a manutenção.
 
 Referências: 
     Methods: https://learn.microsoft.com/pt-br/dotnet/csharp/programming-guide/classes-and-structs/methods
