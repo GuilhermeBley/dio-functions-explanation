@@ -6,7 +6,7 @@ Agora que foi apresentado um _overview_ do que são as funções, podemos agora 
 
 ## Métodos
 
-Métodos são um tipo de função mais comum, eles são representados por blocos de código dentro de uma classe, sua sintaxe é definida pelo nível de acesso, assinaturas opicionais, tipo do retorno, nome do método, seus parâmetros, e por fim, a ação que o método vai realizar ao ser executado. <br/>
+Métodos são um tipo de função mais comum, eles são representados por blocos de código dentro de uma classe, sua sintaxe é definida pelo nível de acesso, assinaturas opcionais, tipo do retorno, nome do método, seus parâmetros, e por fim, a ação que o método vai realizar ao ser executado. <br/>
 
 ```csharp
 public void NomeDoMetodo(string param1, string param2)
@@ -19,7 +19,7 @@ Agora vamos ver o que é especificamente cada um desses itens mencionados.
 
 ### Assinaturas dos métodos
 
-Para iniciar a aplicação de um método, deve-se primeiramente colocar seu nível de visibilidade, sendo eles quatro, `public`, `internal`, `protected` e `private`, estando em uma ordem do mais vísivel para o menos. Isso acaba sendo um recurso fundamental na linguagem de programação, pois por conta disso é possível controlar o acesso aos membros de uma classe. <br/>
+Para iniciar a aplicação de um método, deve-se primeiramente colocar seu nível de visibilidade, sendo eles quatro, `public`, `internal`, `protected` e `private`, estando em uma ordem do mais visível para o menos. Isso acaba sendo um recurso fundamental na linguagem de programação, pois por conta disso é possível controlar o acesso aos membros de uma classe. <br/>
 
 #### public    
 Método pode ser acessado de qualquer local ou projeto.
@@ -147,17 +147,17 @@ public class ExemploPrivado
     }
 }
 ```
-Como pode ser visto nos exemplos, os modificadores de acesso tem um imenso poder dentro do código, através das palavras reservadas `private`, `public`, `internal` e `protected` pode ser controlado quem consegue acessar os métodos de uma classe, tendo níveis para cada um e gerando exceções no caso de descumprimento da norma. Uma maneira mais simples de entender pode ser vista na seguinte imagem, onde cada nível demonstra uma camada a mais de acessibilidade:
+Como pode ser visto nos exemplos, os modificadores de acesso tem um imenso poder no código, através das palavras reservadas `private`, `public`, `internal` e `protected` pode ser controlado quem consegue acessar os métodos de uma classe, tendo níveis para cada um e gerando exceções no caso de descumprimento da norma. Uma maneira mais simples de entender pode ser vista na seguinte imagem, onde cada nível demonstra uma camada a mais de acessibilidade:
 
 ![Encapsulamento](https://github.com/GuilhermeBley/dio-functions-explanation/assets/69880922/53a9b303-d148-467c-9fa2-68fa1985aad6)
 
 Essas assinaturas são fundamentais para controlar o acesso aos métodos de uma classe, promovendo maior segurança, modularidade e manutenibilidade do código em projetos C#.
 
-Além disso, os métodos também podem ter outros tipos de assinaturas opicitonais, como por exemplo:
+Além disso, os métodos também podem ter outros tipos de assinaturas opcionais, por exemplo:
 
 #### abstract, virtual e sealed
 Estes recursos de assinatura são utilizados em casos de herança de classes, podendo realizar a modificação de um membro, ou demarcar que um método em específico não pode ser modificado.<br/>
-Começando pelo _abstract_, essa assinatura basicamente indica que um membro da classe (no nosso caso os métodos) deve obrigatóriamente modificar esse membro caso tenha uma herança, indicando que a implementação é fornecida pelas classes derivadas, sendo assim, caso a classe derivada não implemente esse método, vai ser gerado um erro em tempo de compilação (CS0534).<br/>
+Começando pelo _abstract_, essa assinatura basicamente indica que um membro da classe (no nosso caso os métodos) deve obrigatoriamente modificar esse membro caso tenha uma herança, indicando que a implementação é fornecida pelas classes derivadas, sendo assim, caso a classe derivada não implemente esse método, vai ser gerado um erro em tempo de compilação (CS0534).<br/>
 
 ```csharp
 class ClasseDerivadaOmitindoMetodo : Classe
@@ -180,7 +180,7 @@ abstract class Classe
 }
 ```
 
-Os membros virtuais seguem a mesma lógica do dos abstratos, a única coisa que os diferem é a obrigatóriedade, quando utilizamos o `virtual` ao invés do `abstract` o compilador não vai gerar um erro no membro caso ele não seja sobrescrito, tornando-o opicional como pode ser visto no seguinte exemplo.
+Os membros virtuais seguem a mesma lógica do dos abstratos, a única coisa que os diferem é a obrigatoriedade, quando utilizamos o `virtual` ao invés do `abstract` o compilador não vai gerar um erro no membro caso ele não seja sobrescrito, tornando-o opcional como pode ser visto no seguinte exemplo.
 
 ```csharp
 class ClasseDerivadaOmitindoMetodo : Classe
@@ -235,7 +235,7 @@ class Classe
 }
 ```
 
-O método que deriva do _abstract_ ou _virtual_ deve sempre utilizar a palavra reservada `override`, para indicar ao compilador que aquele método vai sobrescrever o da classe pai, e também o nível de acessibilidade deve ser o mesmo.
+O método que deriva do _abstract_ ou _virtual_ deve sempre utilizar a palavra reservada `override`, para indicar ao compilador que aquele método vai sobrescrever o da classe pai, e também o nível de acessibilidade deve ser o mesmo.<br/>
 
 Sobre métodos abstratos e virtuais é importante salientar que caso algum método utilize um dos dois, ele deve ser no mínimo protegido (_protected_), não permitindo que ele seja privado. Isso acaba fazendo sentido, por conta de que se ele fosse privado, ele só poderia ser visto no escopo da própria classe, e não de uma derivada.
 
@@ -266,25 +266,106 @@ class Classe
 
 Os métodos estáticos são frequentemente usados para operações que não dependem do estado do objeto e podem ser no nível de classe, tendo usos comuns em funções de utilidade, métodos de fábrica, métodos de conversão, etc.
 
-### Retornos
-Logo após todas essas assinaturas de métodos, vamos ir para o seu retorno, que pode existir (retornando qualquer tipo de objeto)
+### Entradas e saídas de métodos
 
-#### void
-#### object
+Logo após todas essas assinaturas de métodos, vamos para as entradas e saídas dos métodos, sendo chamado as entradas de parâmetros, e as saídas de retornos. As entradas são os valores que são passados para o método quando ele é chamado. Esses valores são especificados na declaração do método entre parênteses, como argumentos. Esses argumentos podem ser obrigatórios e opcionais, para serem opcionais eles devem ter algum valor atribuído previamente utilizando `= {valor_constante}` após o nome.<br/>
 
-### Nomenclatura do método
+```csharp
+public void MetodoComParametros(string parametro1, int parametro2, object? parametroOpcional = null)
+{
+    
+}
+```
+
+Métodos com retorno podem retornar qualquer tipo de valor/objeto. A especificação do valor de retorno deve ser feita após as assinaturas, e após especificada, passando para o bloco de código, dentro dele deve ser sempre retornado o valor requerido anteriormente utilizando a palavra `return`, ou ao invés do retorno do valor, pode também ser gerado uma exceção. E no caso de o método não obedecer essa regra, é gerado uma exceção em tempo de compilamento.
+
+```csharp
+public int MetodoComRetorno1()
+{
+    // erro CS0161
+}
+
+public int MetodoComRetorno2()
+{
+    throw new Exception();
+}
+
+public int MetodoComRetorno3()
+{
+    return 1;
+}
+```
+
+
+Mas pode ser também que o método não tenha retorno, quando isso ocorre utilizamos a palavra reservada `void`, indicando que o método não precisa de nenhum valor retornado. Porém, isso não quer dizer que não podemos usar a `return` no bloco de código, mas sim que o retorno não precisa passar nenhum valor.
+
+```csharp
+public void MetodoSemRetorno()
+{
+
+}
+
+public void MetodoUsandoRetorno()
+{
+    var condicaoEspecifica = true;
+
+    if (condicaoEspecifica)
+        return; // Método finaliza aqui, nao executando o método 'FacaAlgo'
+
+    FacaAlgo();
+}
+```
 
 ### Utilização
+A utilização dos métodos acaba sendo bem simples, tendo que prestar atenção nos casos de métodos estáticos somente, onde eles acabam se diferindo dos demais.
 
-#### Utilização sem retorno
-#### Utilização com retorno
+#### Utilização com e sem retorno
+Métodos com retorno e sem não se diferem na implementação, a diferença vem pelo fato de que você pode coletar o dado de um método com retorno.
+
+```csharp
+var instanciaDaClasse = new Classe();
+
+var retorno = instanciaDaClasse.MetodoComRetorno();
+instanciaDaClasse.MetodoSemRetorno();
+```
+
 #### Utilização com parâmetros
+Os parâmetros acabam sendo bem simples de serem utilizados também, podendo eles serem especificados ou não. A especificação acaba ajudando na leitura do código, sendo extremamente útil no caso de métodos com muitos parâmetros.
+
+```csharp
+var instanciaDaClasse = new Classe();
+
+// Sem especificação de parâmetros
+instanciaDaClasse.MetodoComParametros("texto", 1, null);
+
+// Especificando parâmetros
+instanciaDaClasse.MetodoComParametros(
+    parametro1: "texto",
+    parametro2: 1,
+    parametroOpcional: null);
+
+// Omitindo parâmetro opcional
+instanciaDaClasse.MetodoComParametros("texto", 1);
+
+// Omitindo parâmetro obrigatório
+instanciaDaClasse.MetodoComParametros("texto"); // erro (CS0246)
+```
+
 #### Utilização static
+Para a utilização de métodos estáticos deve-se ficar atento ao utilizar o método de classe, e não o de instanciação (utilizados anteriormente), caso seja colocado incorretamente, gera o erro (CS0176). Por conta disso, sempre colocar o nome da classe, e logo após o método que deseja acessar, sempre tendo em mente de que este método não vai ter relação com nenhuma instância da classe.
+
+```csharp
+var instanciaDaClasse = new Classe();
+
+instanciaDaClasse.MetodoEstatico(); // Erro CS0176
+
+Classe.MetodoEstatico(); // Ok
+```
 
 ## Delegados
 
 Outro tipo de função muito comum utilizada no C# são os _delegates_ (delegados), eles são divididos em duas partes, sendo a primeira a _Action_ (`Action<...>`) e a _Func_ (`Func<..., TRetorno>`). A maneira de escrita e implementação se diferem dos métodos, porém, seu funcionamento interno é semelhante.
-Os _delegates_ como já mencionado anteriormente, possuí diversas diferenças dos métodos, como por exemplo as assinaturas, nele não são aplicados nenhuma delas explicitamente, porém, em contra-mão, possuí semelhanças, como conter um bloco de código, um retorno e também pode ser nomeado, como pode ser visto no seguinte exemplo:
+Os _delegates_ como já mencionado anteriormente, possuí diversas diferenças dos métodos, assim como as assinaturas, nele não são aplicados nenhuma delas explicitamente, porém, em contra-mão, possuí semelhanças, como conter um bloco de código, um retorno e também pode ser nomeado, como pode ser visto no seguinte exemplo:
 
 ```csharp
 // Semelhante ao método void
@@ -298,11 +379,11 @@ Func<string> acaoComRetorno = () => {
 };
 ```
 
-Como visto no exemplo, sua sintaxe acaba sendo pouco menos intuitiva que os métodos, já que o _delegate_ pode ser armazendo em uma variavel, propriedade, etc. 
+Como visto no exemplo, sua sintaxe acaba sendo pouco menos intuitiva que os métodos, já que o _delegate_ pode ser armazenado em uma variável, propriedade, etc. 
 
 ### Action
 
-Começando pela _Action_, aproveitando o assunto anterior de métodos, podemos de forma simples interpreta-la como um  método de retorno `void`, sendo assim, não é necessário realizar nenhum tipo de retorno dentro do bloco de código.
+Começando pela _Action_, aproveitando o assunto anterior de métodos, podemos de forma simples interpreta-la como um método de retorno `void`, sendo assim, não é necessário realizar nenhum tipo de retorno no bloco de código.
 Os parâmetros dos métodos podem ser utilizados da mesma forma, diferindo somente a maneira como devem ser passados, como pode ser visto no seguinte exemplo:
 
 
@@ -339,7 +420,7 @@ Func<int> funcao = () => {
 
 ### Utilização
 
-Esse tipo de função _delegate_ acaba sendo extremamente útil e amplamente utilizado na linguagem C#, já que ela possuí a capacidade de armazenar um bloco de código, por se tratar de ser um objeto, ele pode ser instanciado, permitindo que possa ser executado a qualquer momento ou passado adiante.
+Esse tipo de função _delegate_ acaba sendo extremamente útil e amplamente utilizado na linguagem C#, já que ela possui a capacidade de armazenar um bloco de código, por se tratar de ser um objeto, ele pode ser instanciado, permitindo que possa ser executado a qualquer momento ou passado adiante.
 Após realizar a instancição de uma função _delegate_ a execução contida no bloco deve ser feita explicitamente, a maneira mais comum de realizar essa execução é a utilização do método `Invoke` ou apenas colocar o parenteses após o nome da variavel, que está contido em qualquer tipo de _delegate_:
 
 ```csharp
@@ -363,7 +444,7 @@ var valorDoRetorno = someDoisNumeros(numeroParaSoma1, numeroParaSoma2); // valor
 valorDoRetorno = someDoisNumeros(numeroParaSoma1, numeroParaSoma2); // valorDoRetorno = 2
 ```
 
-Um dos casos de uso mais comum são em classes de configuração, como por exemplo, o famoso Entity Framework, em sua implementação podemos ver que é utilizado uma _Action_.
+Um dos casos de uso mais comum são em classes de configuração, por exemplo, o famoso _Entity Framework_, em sua implementação podemos ver que é utilizado uma _Action_.
 
 ```csharp
 builder.Services.AddDbContext<SeuDbContext>(configuracao =>
