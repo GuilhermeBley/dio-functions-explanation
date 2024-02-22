@@ -56,5 +56,46 @@ Os métodos também podem ter outros tipos de assinaturas opicitonais, como por 
 - Utilização sealed
 - Utilização static
 
-Referências: https://learn.microsoft.com/pt-br/dotnet/csharp/programming-guide/classes-and-structs/methods
+## Delegados
+
+Outro tipo de função muito comum utilizada no C# são os _delegates_ (delegados), eles são divididos em duas partes, sendo a primeira a _Action_ (`Action<...>`) e a _Func_ (`Func<..., TRetorno>`). A maneira de escrita e implementação se diferem dos métodos, porém, seu funcionamento interno é semelhante.
+Os _delegates_ como já mencionado anteriormente, possuí diversas diferenças dos métodos, como por exemplo as assinaturas, nele não são aplicados nenhuma delas explicitamente, porém, em contra-mão, possuí semelhanças, como conter um bloco de código, um retorno e também pode ser nomeado, como pode ser visto no seguinte exemplo:
+
+```csharp
+// Semelhante ao método void
+Action acao = () => {
+    // faça algo
+};
+
+// Semelhante à um método com retorno
+Func<string> acaoComRetorno = () => {
+    return "Retorno obrigatório";
+};
+```
+
+Como visto no exemplo, sua sintaxe acaba sendo pouco menos intuitiva que os métodos, já que o _delegate_ pode ser armazendo em uma variavel, propriedade, etc. 
+
+### Action
+
+Começando pela _Action_, aproveitando o assunto anterior de métodos, podemos de forma simples interpreta-la como um  método de retorno `void`, 
+
+### Func
+
+### Utilização
+
+Esse tipo de função _delegate_ acaba sendo extremamente útil e amplamente utilizado na linguagem C#, já que ela possuí a capacidade de armazenar um bloco de código, por se tratar de ser um objeto, ele pode ser instanciado, permitindo que possa ser executado a qualquer momento ou passado adiante.
+Um dos casos de uso mais comum são em classes de configuração, como por exemplo, o famoso Entity Framework, em sua implementação podemos ver que é utilizado uma _Action_.
+
+```csharp
+builder.Services.AddDbContext<SeuDbContext>(configuracao =>
+{
+    // Utilizando uma Action para configuração.
+    // Parâmetro 'configuracao' passa um objeto editável que será
+    // executado posteriormente.
+});
+```
+
+Referências: 
+    Methods: https://learn.microsoft.com/pt-br/dotnet/csharp/programming-guide/classes-and-structs/methods
+    Delegados: https://www.freecodecamp.org/news/action-and-func-delegates-in-c-sharp/
 
