@@ -455,8 +455,8 @@ builder.Services.AddDbContext<SeuDbContext>(configuracao =>
 });
 ```
 
-### Importância das funções no C#
-podendo ser úteis organizar o código, promover reutilização e modularidade, e facilitar a manutenção.
+## Importância das funções no C#
+Finalizando, após todas essas explicações sobre as funções no C#, podemos concluir que elas são extremamente úteis para organizar o código, promover reutilização, modularidade, e facilitar a manutenção. Contudo, lembre-se sempre de manter as boas práticas, de sempre um novo descritivo e de acordo para as funções, e também não exagere na quantidade de linhas, tente separar seu código em pequenos blocos para facilitar sua visualização.
 
 Referências:
 <br/>Methods: https://learn.microsoft.com/pt-br/dotnet/csharp/programming-guide/classes-and-structs/methods
