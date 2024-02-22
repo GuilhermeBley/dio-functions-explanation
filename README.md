@@ -77,13 +77,67 @@ Como visto no exemplo, sua sintaxe acaba sendo pouco menos intuitiva que os mét
 
 ### Action
 
-Começando pela _Action_, aproveitando o assunto anterior de métodos, podemos de forma simples interpreta-la como um  método de retorno `void`, 
+Começando pela _Action_, aproveitando o assunto anterior de métodos, podemos de forma simples interpreta-la como um  método de retorno `void`, sendo assim, não é necessário realizar nenhum tipo de retorno dentro do bloco de código.
+Os parâmetros dos métodos podem ser utilizados da mesma forma, diferindo somente a maneira como devem ser passados, como pode ser visto no seguinte exemplo:
+
+
+```csharp
+Action<string, int> acao = (parametro1, parametro2) => {
+    // faça algo
+};
+```
+O `parametro1` é uma `string` e o `parametro2` é um `int`, como pode ser visto no tipo da variável `Action<string, int>`, esses parâmetros seguem a mesma ordem que os argumentos tipados colocados na _Action_, podendo comportar até 16 parâmetros na versão _.net core 6_.
 
 ### Func
+
+Como mencionado anteriormente, a _Func_ é igual à um método com retorno, e segue a mesma lógica de uma _Action_ também, podendo receber parâmetros e ser instânciavel.
+
+```csharp
+Func<int, int, int> someDoisNumeros = (numero1, numero2) => {
+    return numero1 + numero2;
+};
+```
+
+Sobre os argumentos tipados da _Func_, é importante salientar que o primeiro à direita sempre vai ser o retorno que ela vai ter, sendo assim, um argumento tipado obrigatório deste objeto. Também é importante mencionar que uma _Func_ deve sempre retornar um valor, gerando um erro em qualquer um dos casos mencionados anteriormente:
+
+```csharp
+// Gera o erro CS0305 por não definir um retorno
+Func funcao = () => {
+    
+};
+
+// Gera o erro CS1643 por não efetuar nenhum retorno
+Func<int> funcao = () => {
+    
+};
+```
 
 ### Utilização
 
 Esse tipo de função _delegate_ acaba sendo extremamente útil e amplamente utilizado na linguagem C#, já que ela possuí a capacidade de armazenar um bloco de código, por se tratar de ser um objeto, ele pode ser instanciado, permitindo que possa ser executado a qualquer momento ou passado adiante.
+Após realizar a instancição de uma função _delegate_ a execução contida no bloco deve ser feita explicitamente, a maneira mais comum de realizar essa execução é a utilização do método `Invoke` ou apenas colocar o parenteses após o nome da variavel, que está contido em qualquer tipo de _delegate_:
+
+```csharp
+Action<string> acao = (parametro1) => {
+    // faça algo
+};
+
+
+Func<int, int, int> someDoisNumeros = (numero1, numero2) => {
+    return numero1 + numero2;
+};
+
+var parametro1 = "minha string";
+
+acao.Invoke(parametro1);
+acao(parametro1);
+
+int numeroParaSoma1 = 1, numeroParaSoma2 = 1;
+
+var valorDoRetorno = someDoisNumeros(numeroParaSoma1, numeroParaSoma2); // valorDoRetorno = 2
+valorDoRetorno = someDoisNumeros(numeroParaSoma1, numeroParaSoma2); // valorDoRetorno = 2
+```
+
 Um dos casos de uso mais comum são em classes de configuração, como por exemplo, o famoso Entity Framework, em sua implementação podemos ver que é utilizado uma _Action_.
 
 ```csharp
@@ -94,6 +148,8 @@ builder.Services.AddDbContext<SeuDbContext>(configuracao =>
     // executado posteriormente.
 });
 ```
+
+### Importância das funções no C#
 
 Referências: 
     Methods: https://learn.microsoft.com/pt-br/dotnet/csharp/programming-guide/classes-and-structs/methods
