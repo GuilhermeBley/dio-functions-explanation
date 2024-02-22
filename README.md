@@ -20,7 +20,7 @@ Agora vamos ver o que é especificamente cada um desses itens mencionados.
 ### Assinaturas dos métodos
 
 Para iniciar a aplicação de um método, deve-se primeiramente colocar seu nível de visibilidade, sendo eles quatro, `public`, `internal`, `protected` e `private`, estando em uma ordem do mais vísivel para o menos. Isso acaba sendo um recurso fundamental na linguagem de programação, pois por conta disso é possível controlar o acesso aos membros de uma classe. <br/>
-- public <br/>
+#### public
     Método pode ser acessado de qualquer local ou projeto.
 
 ```csharp
@@ -53,7 +53,7 @@ namespace Projeto1
 }
 ```
   
-- internal <br/>
+#### internal <br/>
     Método pode ser acessado de qualquer local dentro do próprio projeto (mesmo _Assembly_).
 ```csharp
 namespace Projeto2
@@ -94,7 +94,7 @@ namespace Projeto1
 
 Obs. Exemplo de método `internal` e `public` anterior simula `projeto1` e `projeto2` em diferentes projetos, e não no mesmo arquivo.
 
-- protected <br/>
+#### protected <br/>
     Método pode ser acessado somente de dentro da classe ou caso tenha uma herança.
 
 ```csharp
@@ -122,7 +122,7 @@ public class ExemploProtected
 }
 ```
   
-- private <br/>
+#### private <br/>
     Método pode ser acessado somente de dentro da classe.
 
 ```csharp
@@ -153,17 +153,99 @@ Essas assinaturas são fundamentais para controlar o acesso aos métodos de uma 
 
 Além disso, os métodos também podem ter outros tipos de assinaturas opicitonais, como por exemplo:
 
-- abstract
-- virtual
-- async
-- sealed
-- static
+#### abstract, virtual e sealed
+Estes recursos de assinatura são utilizados em casos de herança de classes, podendo realizar a modificação de um membro, ou demarcar que um método em específico não pode ser modificado.<br/>
+Começando pelo _abstract_, essa assinatura basicamente indica que um membro da classe (no nosso caso os métodos) deve obrigatóriamente modificar esse membro caso tenha uma herança, indicando que a implementação é fornecida pelas classes derivadas, sendo assim, caso a classe derivada não implemente esse método, vai ser gerado um erro em tempo de compilação (CS0534).<br/>
+
+```csharp
+class ClasseDerivadaOmitindoMetodo : Classe
+{
+    // Gera erro (CS0534)
+}
+
+class ClasseDerivada : Classe
+{
+    protected override void MetodoAbstrato()
+    {
+
+    }
+}
+
+
+abstract class Classe
+{
+    protected abstract void MetodoAbstrato();
+}
+```
+
+Os membros virtuais seguem a mesma lógica do dos abstratos, a única coisa que os diferem é a obrigatóriedade, quando utilizamos o `virtual` ao invés do `abstract` o compilador não vai gerar um erro no membro caso ele não seja sobrescrito, tornando-o opicional como pode ser visto no seguinte exemplo.
+
+```csharp
+class ClasseDerivadaOmitindoMetodo : Classe
+{
+    // Não gera erro
+}
+
+class ClasseDerivada : Classe
+{
+    protected override void MetodoAbstrato()
+    {
+
+    }
+}
+
+
+class Classe
+{
+    protected virtual void MetodoAbstrato()
+    {
+
+    }
+}
+```
+
+Passando agora para os métodos selados, esse modificador é usado nos métodos para evitar que eles sejam sobrescritos, sendo assim, a palavra `sealed` sempre vai estar em conjunto com o `override` nos métodos. No caso de descumprimento do selamento, se por ventura algum método force sobrescrever um outro _sealed_, ele vai ser barrado pelo compilador, que irá gerar um erro CS0239.
+
+```csharp
+class ClasseDerivadaDaDerivada : ClasseDerivada
+{
+    protected override void MetodoAbstrato()
+    {
+        // Erro (CS0239)
+    }
+}
+
+class ClasseDerivada : Classe
+{
+    protected sealed override void MetodoAbstrato()
+    {
+
+    }
+}
+
+
+class Classe
+{
+    protected virtual void MetodoAbstrato()
+    {
+
+    }
+}
+```
+
+O método que deriva do _abstract_ ou _virtual_ deve sempre utilizar a palavra reservada `override`, para indicar ao compilador que aquele método vai sobrescrever o da classe pai, e também o nível de acessibilidade deve ser o mesmo.
+
+Sobre métodos abstratos e virtuais é importante salientar que caso algum método utilize um dos dois, ele deve ser no mínimo protegido (_protected_), não permitindo que ele seja privado. Isso acaba fazendo sentido, por conta de que se ele fosse privado, ele só poderia ser visto no escopo da própria classe, e não de uma derivada.
+
+
+#### async
+#### static
   Métodos com assinatura `static` não compartilham do contexto da classe, como o próprio nome diz, eles são estáticos e não tem um 'estado'.
   
 ### Retornos
 
-- void
-- object
+#### void
+#### object
 
 ### Nomenclatura do método
 
@@ -171,15 +253,15 @@ Além disso, os métodos também podem ter outros tipos de assinaturas opicitona
 
 ### Utilização
 
-- Utilização sem retorno
-- Utilização com retorno
-- Utilização com parâmetros
-- Utilização com parâmetros tipados
+#### Utilização sem retorno
+#### Utilização com retorno
+#### Utilização com parâmetros
+#### Utilização com parâmetros tipados
   Falar sobre `System.Text.Json.JsonSerializar`
   
-- Utilização abstract e virtual
-- Utilização sealed
-- Utilização static
+#### Utilização abstract e virtual
+#### Utilização sealed
+#### Utilização static
 
 ## Delegados
 
