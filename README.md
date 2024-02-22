@@ -6,7 +6,7 @@ Agora que foi apresentado um _overview_ do que são as funções, podemos agora 
 
 ## Métodos
 
-Métodos são um tipo de função mais comum, eles são representados por blocos de código dentro de uma classe, sua sintaxe é definida pelo nível de acesso, assinaturas opicionais, tipo do retorno, nome do método, parâmetro opcional tipado, seus respectivos parâmetros, e por fim, a ação que o método vai realizar ao ser executado. <br/>
+Métodos são um tipo de função mais comum, eles são representados por blocos de código dentro de uma classe, sua sintaxe é definida pelo nível de acesso, assinaturas opicionais, tipo do retorno, nome do método, seus parâmetros, e por fim, a ação que o método vai realizar ao ser executado. <br/>
 
 ```csharp
 public void NomeDoMetodo(string param1, string param2)
@@ -237,27 +237,22 @@ O método que deriva do _abstract_ ou _virtual_ deve sempre utilizar a palavra r
 
 Sobre métodos abstratos e virtuais é importante salientar que caso algum método utilize um dos dois, ele deve ser no mínimo protegido (_protected_), não permitindo que ele seja privado. Isso acaba fazendo sentido, por conta de que se ele fosse privado, ele só poderia ser visto no escopo da própria classe, e não de uma derivada.
 
-
-#### async
 #### static
   Métodos com assinatura `static` não compartilham do contexto da classe, como o próprio nome diz, eles são estáticos e não tem um 'estado'.
   
 ### Retornos
+Logo após todas essas assinaturas de métodos, vamos ir para o seu retorno, que pode existir (retornando qualquer tipo de objeto)
 
 #### void
 #### object
 
 ### Nomenclatura do método
 
-### Parâmetros tipados e não tipados
-
 ### Utilização
 
 #### Utilização sem retorno
 #### Utilização com retorno
 #### Utilização com parâmetros
-#### Utilização com parâmetros tipados
-  Falar sobre `System.Text.Json.JsonSerializar`
   
 #### Utilização abstract e virtual
 #### Utilização sealed
@@ -293,7 +288,7 @@ Action<string, int> acao = (parametro1, parametro2) => {
     // faça algo
 };
 ```
-O `parametro1` é uma `string` e o `parametro2` é um `int`, como pode ser visto no tipo da variável `Action<string, int>`, esses parâmetros seguem a mesma ordem que os argumentos tipados colocados na _Action_, podendo comportar até 16 parâmetros na versão _.net core 6_.
+O `parametro1` é uma `string` e o `parametro2` é um `int`, como pode ser visto no tipo da variável `Action<string, int>`, esses parâmetros seguem a mesma ordem que os argumentos genéricos colocados na _Action_, podendo comportar até 16 parâmetros na versão _.net core 6_.
 
 ### Func
 
@@ -305,7 +300,7 @@ Func<int, int, int> someDoisNumeros = (numero1, numero2) => {
 };
 ```
 
-Sobre os argumentos tipados da _Func_, é importante salientar que o primeiro à direita sempre vai ser o retorno que ela vai ter, sendo assim, um argumento tipado obrigatório deste objeto. Também é importante mencionar que uma _Func_ deve sempre retornar um valor, gerando um erro em qualquer um dos casos mencionados anteriormente:
+Sobre os argumentos genéricos da _Func_, é importante salientar que o primeiro à direita sempre vai ser o retorno que ela vai ter, sendo assim, um argumento genérico obrigatório deste objeto. Também é importante mencionar que uma _Func_ deve sempre retornar um valor, gerando um erro em qualquer um dos casos mencionados anteriormente:
 
 ```csharp
 // Gera o erro CS0305 por não definir um retorno
