@@ -1,4 +1,4 @@
-# funções em C#
+# Funções em C#
 
 Nesse artigo vai ser apresentado como podem ser utilizadas e o que são as funções na linguagem C#.
 Primeiramente, deve ser explicado o que são as funções, sendo elas basicamente blocos de código que realizam uma atividade específica e podem ser reutilizados em diferentes partes de uma aplicação.
