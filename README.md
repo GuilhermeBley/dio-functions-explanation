@@ -6,10 +6,10 @@ Agora que foi apresentado um _overview_ do que são as funções, podemos agora 
 
 ## Métodos
 
-Métodos são blocos de código dentro de uma classe, sua sintaxe é definida pelo nível de acesso, assinaturas opicionais, tipo do retorno, nome do método, parâmetro opcional tipado, e por fim, seus respectivos parâmetros.
+Métodos são um tipo de função, que são representados por blocos de código dentro de uma classe, sua sintaxe é definida pelo nível de acesso, assinaturas opicionais, tipo do retorno, nome do método, parâmetro opcional tipado, seus respectivos parâmetros, e por fim, a ação que o método vai realizar ao ser executado.
 
 ```csharp
-public void MyMethodName(string param1, string param2)
+public void NomeDoMetodo(string param1, string param2)
 {
     // your code here
 }
